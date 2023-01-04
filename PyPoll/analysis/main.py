@@ -2,6 +2,8 @@ import os
 import csv
     
 input_path = os.path.join('..', 'Resources', 'election_data.csv')
+
+# Initializing variables to store the winner of the election
 winner =""
 winning_count=0
 
@@ -12,10 +14,9 @@ with open(input_path) as polldata:
     # Skipping the header and storing
     csvheader = next(csvreader)
 
-    # initializing variables, where unique_candidates store the names of each candidate, a counter for all the votes, and a converting the csvreader to a list
+    # initializing variables, where unique_candidates store the names of each candidate, a counter for all the votes
     total_num_votes = 0
     unique_candidates = []
-    list = []
     candidate_votes = {}
 
     for row in csvreader:
@@ -25,20 +26,9 @@ with open(input_path) as polldata:
             unique_candidates.append(name)
             candidate_votes[name] = 0
         candidate_votes[name] +=1
-    #     list.append(row)
     print(candidate_votes)
-# Initialing a list to store the voting for each candidate
 
-# count_votes = []
-
-# for candidate in unique_candidates:
-#     counter = 0
-#     for item in list:
-#         if item[2] == candidate:
-#             counter +=1
-#     count_votes.append(counter)
-
-# Initializing a list to store the percentage of voting each candidate obtained
+# Creating the output file
 
 output_path = os.path.join('analysis.txt')
 
@@ -66,29 +56,3 @@ Winner: {winner}
     """
     print(winner_output)
     output_data.write(winner_output)
-# percentages = [round(item/total_num_votes*100,2) for item in count_votes]
-
-# The three lists are zipped, and will be used to store to an output file
-# results = zip(unique_candidates, count_votes, percentages)
-
-# Determining the winner of the election
-
-# winner = unique_candidates[percentages.index(max(percentages))]
-
-# # Print all results on Terminal
-# print("Election Results \n---------------------")
-# print(f"Total votes: {total_num_votes} \n---------------------")
-# for item in results:
-#     print(f'{item[0]}: {item[1]} votes, {item[2]}%')
-# print(f'---------------------\nWinner: {winner} ')
-
-# # Store data to an output file
-# output_path = os.path.join('analysis.csv')
-
-# results = zip(unique_candidates, count_votes, percentages)
-
-# with open(output_path,"w") as output_data:
-#     csvwriter = csv.writer(output_data)
-#     header = ['candidate', 'total number of votes', 'percentage voting']
-#     csvwriter.writerow(header)
-#     csvwriter.writerows(results)
